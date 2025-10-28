@@ -10,6 +10,6 @@ namespace MauiDevelopmentCourse.ViewModels
         [NotifyPropertyChangedFor(nameof(isNotLoading))]
         bool isLoading;
 
-        bool isNotLoading => !isLoading;
+        public bool isNotLoading => !isLoading;
     }
 }

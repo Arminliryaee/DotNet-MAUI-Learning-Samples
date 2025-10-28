@@ -9,10 +9,11 @@ namespace MauiDevelopmentCourse.ViewModels
     public partial class CarListViewModel : BaseViewModel
     {
         private readonly CarRepository repository;
-        private ObservableCollection<Car> Cars = [];
+        public ObservableCollection<Car> Cars { get; private set; } = [];
 
         public CarListViewModel(CarRepository repository)
         {
+            Title = "Car List";
             this.repository = repository;
         }
 
@@ -23,15 +24,11 @@ namespace MauiDevelopmentCourse.ViewModels
             try
             {
                 IsLoading = true;
-                if (Cars.Any())
-                {
-                    Cars.Clear();
-                    var cars = repository.GetCars();
-                    foreach (var car in cars)
-                    {
-                        Cars.Add(car);
-                    }
-                }
+                if (Cars.Any()) Cars.Clear();
+
+                var cars = repository.GetCars();
+                foreach (var car in cars) Cars.Add(car);
+
             }
             catch (Exception ex)
             {
