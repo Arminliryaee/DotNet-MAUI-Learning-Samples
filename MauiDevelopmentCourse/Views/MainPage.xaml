@@ -7,20 +7,29 @@
              x:Class="MauiDevelopmentCourse.MainPage"
              Title="{Binding Title}">
 
-    <Grid RowDefinitions="*,100" ColumnDefinitions="*,auto">
-          <CollectionView ItemsSource="{Binding Cars}" Grid.ColumnSpan="2" SelectionMode="None">
-              <CollectionView.ItemTemplate >
-                  <DataTemplate x:DataType="model:Car">
-                      <Border HeightRequest="90">
-                          <HorizontalStackLayout Spacing="5" Padding="10">
-                              <Label Text="{Binding Brand}"/>
-                              <Label Text="{Binding Model}"/>
-                          </HorizontalStackLayout>
-                      </Border>
-                  </DataTemplate>
-              </CollectionView.ItemTemplate>
-          </CollectionView>
-        <Button Text="Fetch List" Command="{Binding GetCarsCommand}" IsEnabled="{Binding isNotLoading}" Grid.Row="1" Grid.Column="0"/>
+    <Grid RowDefinitions="*,auto" ColumnDefinitions="*,auto">
+
+        <RefreshView 
+            Grid.ColumnSpan="2"
+            Command="{Binding GetCarsCommand}"
+            IsRefreshing="{Binding IsRefreshing}"
+            >
+            <CollectionView ItemsSource="{Binding Cars}" SelectionMode="None">
+                <CollectionView.ItemTemplate >
+                    <DataTemplate x:DataType="model:Car">
+                        <Border HeightRequest="90">
+                            <HorizontalStackLayout Spacing="5" Padding="10">
+                                <Label Text="{Binding Brand}"/>
+                                <Label Text="{Binding Model}"/>
+                            </HorizontalStackLayout>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+
+        <Button Grid.Row="1" Command="{Binding GetCarsCommand}" IsEnabled="{Binding isNotLoading}"/>
+
     </Grid>
 
 </ContentPage>

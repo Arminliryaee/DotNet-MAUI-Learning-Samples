@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using MauiDevelopmentCourse.Models;
 using MauiDevelopmentCourse.Repositories;
 using System.Collections.ObjectModel;
@@ -16,6 +17,9 @@ namespace MauiDevelopmentCourse.ViewModels
             Title = "Car List";
             this.repository = repository;
         }
+        [ObservableProperty]
+        bool isRefreshing;
+
 
         [RelayCommand]
         async Task GetCars()
@@ -38,6 +42,7 @@ namespace MauiDevelopmentCourse.ViewModels
             finally
             {
                 IsLoading = false;
+                IsRefreshing = false;
             }
 
         }
